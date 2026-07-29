@@ -141,6 +141,9 @@ export class UI {
 
       this.listaTareas.appendChild(li);
     });
+
+    // Guardar automáticamente el estado actual en el LocalStorage
+    guardarEnLocalStorage(this.gestor.obtenerTareas());
   }
 
   // Función que muestra notificación y la oculta tras 2 segundos con setTimeout (Paso 4)
