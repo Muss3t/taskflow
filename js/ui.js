@@ -25,6 +25,8 @@ export class UI {
     this.listaTareas.addEventListener("click", (e) =>
       this.manejarClickLista(e),
     );
+    // NUEVO EVENTO: Iniciar el contador regresivo que se actualiza cada 1 segundo (Paso 4)
+        setInterval(() => this.actualizarContadores(), 1000)
   }
 
   // Maneja el submit del formulario
