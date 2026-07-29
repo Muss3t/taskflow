@@ -1,5 +1,6 @@
 //aqui voy a gestionar la comunicacion con el exterior y con
 // la persistencia de datos, comnsumiendo la API de prueba (JSONPlaceholder)
+// al principio pense cambiar los textos que aparecen en la pagina principal en latin, pero seria romper con los datos de la API
 
 
 // 1. Consumo de API con fetch y try/catch
