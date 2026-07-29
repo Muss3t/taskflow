@@ -1,6 +1,55 @@
-TaskFlow
-    
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Gestión de Tareas</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>TaskFlow</h1>
+            <p>Aplicación de Gestión de Tareas en JavaScript</p>
+        </header>
 
+        <!-- Área de mensajes y notificaciones asíncronas -->
+        <div id="notificacion" class="notificacion hidden"></div>
 
-    
-        TaskFlow
+        <!-- Formulario para agregar tareas -->
+        <section class="form-section">
+            <form id="task-form">
+                <input 
+                    type="text" 
+                    id="task-input" 
+                    placeholder="Escribe la descripción de la tarea..." 
+                    required 
+                />
+                <input 
+                    type="datetime-local" 
+                    id="task-deadline" 
+                    title="Fecha y hora límite (Opcional)"
+                />
+                <button type="submit" id="btn-agregar">Agregar Tarea</button>
+            </form>
+        </section>
+
+        <!-- Filtro / Búsqueda interactiva (Evento keyup) -->
+        <section class="filter-section">
+            <input 
+                type="text" 
+                id="search-input" 
+                placeholder="Buscar tareas en tiempo real (keyup)..." 
+            />
+        </section>
+
+        <!-- Lista donde se insertarán dinámicamente las tareas -->
+        <main class="tasks-section">
+            <h2>Mis Tareas</h2>
+            <ul id="task-list" class="task-list"></ul>
+        </main>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
