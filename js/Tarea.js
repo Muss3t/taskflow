@@ -1,4 +1,5 @@
-// en este módulo debo exportar la clase individual de la tarea, añadiendo una fechaLimite para más adelante poder cumplir con el requerimiento de tener un contador regresivo
+// en este módulo debo exportar la clase individual de la tarea
+// añadiendo una fechaLimite para más adelante poder cumplir con el requerimiento de tener un contador regresivo
 
 export class Tarea {
   // Uso de destructuring en el constructor para recibir un objeto

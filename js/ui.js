@@ -1,4 +1,5 @@
-// aqui lo que creamos sirve para gestionar la renderización del DOM y la captación de eventos de usuario, manteniendo el principio de modularidad.
+// aqui lo que creamos sirve para gestionar la renderización del DOM y la captación de eventos de usuario, 
+// manteniendo el principio de modularidad.
 
 export class UI {
   constructor(gestorTareas) {

@@ -1,19 +1,35 @@
-// (este será mi ejemplo de instanciacion provisional, me servirá para probar que todo lo hecho funciona)
-import { GestorTareas } from './GestorTareas.js';
+// (este será mi ejemplo de instanciacion provisional, me servirá para probar que todo lo hecho funciona que luego comentaré)
+import { GestorTareas } from "./GestorTareas.js";
+import { UI } from "./ui.js";
 
-// Instanciación (Punto 1)
+/* ========================================================
+   PRUEBAS INICIALES (Puntos 1 y 2)
+   --------------------------------------------------------
+   Este código lo usé para validar por consola que la POO 
+   y los métodos del Gestor funcionaban correctamente.
+   
+   const gestorDePrueba = new GestorTareas();
+   const tarea1 = gestorDePrueba.agregarTarea({ descripcion: 'Configurar base de datos' });
+   const tarea2 = gestorDePrueba.agregarTarea({ descripcion: 'Diseñar interfaz UI' });
+   
+   console.log('Tareas actuales:', gestorDePrueba.obtenerTareas());
+   tarea1.cambiarEstado('completada');
+   gestorDePrueba.eliminarTarea(tarea2.id);
+   console.log('Tareas tras modificaciones:', gestorDePrueba.obtenerTareas());
+======================================================== */
+
+// ========================================================
+// CÓDIGO OPERATIVO DE LA APLICACIÓN (Paso 3 en adelante)
+// ========================================================
+
+// 1. Instanciamos la clase que maneja los datos
 const gestor = new GestorTareas();
 
-// Creo un par de tareas de prueba usando let/const y objetos (Punto 2)
-const tarea1 = gestor.agregarTarea({ descripcion: 'Configurar base de datos' });
-const tarea2 = gestor.agregarTarea({ descripcion: 'Diseñar interfaz UI' });
+// 2. Instanciamos la clase que maneja lo visual y le pasamos el gestor
+const ui = new UI(gestor);
 
-console.log('Tareas actuales:', gestor.obtenerTareas());
+// 3. Encendemos los eventos del DOM (clicks, submits, teclado)
+ui.iniciarEventos();
 
-// Cambio el estado de una tarea
-tarea1.cambiarEstado('completada');
-
-// Elimino segunda tarea
-gestor.eliminarTarea(tarea2.id);
-
-console.log('Tareas tras modificaciones:', gestor.obtenerTareas());
+// 4. Renderizamos la lista inicial (vacía al cargar)
+ui.renderizar();
