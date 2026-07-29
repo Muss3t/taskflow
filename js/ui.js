@@ -111,9 +111,17 @@ export class UI {
       li.dataset.id = tarea.id;
       li.className = `task-item ${tarea.estado === "completada" ? "completada" : ""}`;
 
-      // Contenido dinámico usando Template Literals
-      li.innerHTML = `
+// BORRO EL ANTERIOR y el espacio para el contador si la tarea tiene fecha límite
+            let htmlContador = '';
+            if (tarea.fechaLimite) {
+                // Guardamos la fecha límite en un atributo (data-limite) para leerla luego
+                htmlContador = `<br><small class="countdown" data-limite="${tarea.fechaLimite}"></small>`;
+            }
+
+            // Contenido dinámico usando Template Literals (ACTUALIZADO)
+            li.innerHTML = `
                 <span class="descripcion-text">${tarea.descripcion}</span>
+                ${htmlContador}
                 <div class="acciones">
                     <button class="btn-estado">${tarea.estado === "completada" ? "Desmarcar" : "Completar"}</button>
                     <button class="btn-eliminar">Eliminar</button>
