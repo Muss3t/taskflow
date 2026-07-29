@@ -1,0 +1,121 @@
+// aqui lo que creamos sirve para gestionar la renderización del DOM y la captación de eventos de usuario, manteniendo el principio de modularidad.
+
+export class UI {
+  constructor(gestorTareas) {
+    this.gestor = gestorTareas;
+    // Referencias a elementos del DOM
+    this.form = document.getElementById("task-form");
+    this.inputDescripcion = document.getElementById("task-input");
+    this.inputFechaLimite = document.getElementById("task-deadline");
+    this.inputBusqueda = document.getElementById("search-input");
+    this.listaTareas = document.getElementById("task-list");
+    this.notificacion = document.getElementById("notificacion");
+  }
+
+  // Inicializa la escucha de todos los eventos solicitados
+  iniciarEventos() {
+    // Evento 'submit': Capturar envío del formulario
+    this.form.addEventListener("submit", (e) => this.manejarSubmit(e));
+
+    // Evento 'keyup': Búsqueda o filtrado en tiempo real
+    this.inputBusqueda.addEventListener("keyup", (e) => this.filtrarTareas(e));
+
+    // Eventos 'click' delegados para cambiar estado o eliminar tareas
+    this.listaTareas.addEventListener("click", (e) =>
+      this.manejarClickLista(e),
+    );
+  }
+
+  // Maneja el submit del formulario
+  manejarSubmit(e) {
+    e.preventDefault();
+    const descripcion = this.inputDescripcion.value.trim();
+    const fechaLimite = this.inputFechaLimite.value
+      ? new Date(this.inputFechaLimite.value)
+      : null;
+
+    if (!descripcion) return;
+
+    // Agregar la tarea al gestor
+    this.gestor.agregarTarea({ descripcion, fechaLimite });
+
+    // Limpiar formulario y renderizar
+    this.form.reset();
+    this.renderizar();
+  }
+
+  // Evento 'keyup': Filtra visualmente la lista
+  filtrarTareas(e) {
+    const texto = e.target.value.toLowerCase();
+    const items = this.listaTareas.querySelectorAll("li");
+
+    items.forEach((item) => {
+      const descripcion = item
+        .querySelector(".descripcion-text")
+        .textContent.toLowerCase();
+      if (descripcion.includes(texto)) {
+        item.style.display = "flex";
+      } else {
+        item.style.display = "none";
+      }
+    });
+  }
+
+  // Evento 'click': Delegación de eventos para eliminar o alternar estado
+  manejarClickLista(e) {
+    const target = e.target;
+    const li = target.closest("li");
+    if (!li) return;
+
+    const id = li.dataset.id;
+
+    // Botón Eliminar
+    if (target.classList.contains("btn-eliminar")) {
+      this.gestor.eliminarTarea(id);
+      this.renderizar();
+    }
+
+    // Botón Completar / Cambiar Estado
+    if (target.classList.contains("btn-estado")) {
+      const tarea = this.gestor.obtenerTareas().find((t) => t.id === id);
+      if (tarea) {
+        const nuevoEstado =
+          tarea.estado === "pendiente" ? "completada" : "pendiente";
+        tarea.cambiarEstado(nuevoEstado);
+        this.renderizar();
+      }
+    }
+  }
+
+  // Modificar el DOM dinámicamente
+  renderizar() {
+    this.listaTareas.innerHTML = "";
+    const tareas = this.gestor.obtenerTareas();
+
+    tareas.forEach((tarea) => {
+      const li = document.createElement("li");
+      li.dataset.id = tarea.id;
+      li.className = `task-item ${tarea.estado === "completada" ? "completada" : ""}`;
+
+      // Contenido dinámico usando Template Literals
+      li.innerHTML = `
+                <span class="descripcion-text">${tarea.descripcion}</span>
+                <div class="acciones">
+                    <button class="btn-estado">${tarea.estado === "completada" ? "Desmarcar" : "Completar"}</button>
+                    <button class="btn-eliminar">Eliminar</button>
+                </div>
+            `;
+
+      // Evento 'mouseover' y 'mouseout' requeridos en la pauta para interactividad
+      li.addEventListener("mouseover", () => {
+        li.style.backgroundColor =
+          tarea.estado === "completada" ? "#e2e8f0" : "#f0fdf4";
+      });
+      li.addEventListener("mouseout", () => {
+        li.style.backgroundColor = "";
+      });
+
+      this.listaTareas.appendChild(li);
+    });
+  }
+}
