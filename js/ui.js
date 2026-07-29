@@ -29,23 +29,34 @@ export class UI {
         setInterval(() => this.actualizarContadores(), 1000)
   }
 
-  // Maneja el submit del formulario
-  manejarSubmit(e) {
-    e.preventDefault();
-    const descripcion = this.inputDescripcion.value.trim();
-    const fechaLimite = this.inputFechaLimite.value
-      ? new Date(this.inputFechaLimite.value)
-      : null;
+// Maneja el submit del formulario con Asincronía (Paso 4) -  ACTUaLIZADO
+    manejarSubmit(e) {
+        e.preventDefault();
+        const descripcion = this.inputDescripcion.value.trim();
+        const fechaLimite = this.inputFechaLimite.value ? new Date(this.inputFechaLimite.value) : null;
 
-    if (!descripcion) return;
+        if (!descripcion) return;
 
-    // Agregar la tarea al gestor
-    this.gestor.agregarTarea({ descripcion, fechaLimite });
+        // CambiO el texto del botón para simular carga
+        const btnAgregar = document.getElementById('btn-agregar');
+        const textoOriginal = btnAgregar.textContent;
+        btnAgregar.textContent = 'Agregando...';
+        btnAgregar.disabled = true;
 
-    // Limpiar formulario y renderizar
-    this.form.reset();
-    this.renderizar();
-  }
+        // Simular un retardo de 1 segundo al agregar la tarea (Paso 4)
+        setTimeout(() => {
+            this.gestor.agregarTarea({ descripcion, fechaLimite });
+            this.form.reset();
+            this.renderizar();
+
+            // Mostrar notificación tras el guardado
+            this.mostrarNotificacion('¡Tarea agregada exitosamente!');
+
+            // Restaurar el botón
+            btnAgregar.textContent = textoOriginal;
+            btnAgregar.disabled = false;
+        }, 1000); // 1000 milisegundos = 1 segundo de retardo
+    }
 
   // Evento 'keyup': Filtra visualmente la lista
   filtrarTareas(e) {
