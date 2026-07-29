@@ -1,0 +1,195 @@
+/* 1. Variables de color para mantener un diseño consistente */
+:root {
+    --primary-color: #4f46e5;      /* Azul índigo */
+    --primary-hover: #4338ca;
+    --bg-color: #f3f4f6;           /* Gris muy claro para el fondo */
+    --text-color: #1f2937;         /* Gris oscuro para texto */
+    --border-color: #e5e7eb;
+    --danger-color: #ef4444;       /* Rojo para eliminar */
+    --danger-hover: #dc2626;
+    --success-color: #10b981;      /* Verde para completar */
+    --success-hover: #059669;
+}
+
+/* 2. Reset básico y tipografía */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 40px 20px;
+}
+
+/* 3. Contenedor principal (estilo tarjeta) */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--border-color);
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    letter-spacing: -0.5px;
+}
+
+header p {
+    color: #6b7280;
+    font-size: 1.1rem;
+}
+
+/* 4. Estilos de Formulario e Inputs */
+.form-section form {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap; /* pantallas pequeñas */
+}
+
+input[type="text"],
+input[type="datetime-local"] {
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"] {
+    flex: 1; /* Hace que el buscador ocupe todo el espacio sobrante */
+    min-width: 250px;
+}
+
+input[type="text"]:focus,
+input[type="datetime-local"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+/* 5. Estilos generales de Botones */
+button {
+    padding: 12px 24px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+}
+
+button:active:not(:disabled) {
+    transform: scale(0.98); /* Pequeño efecto al hacer clic */
+}
+
+button:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+/* 6. Buscador interactivo */
+.filter-section {
+    margin-bottom: 30px;
+}
+
+.filter-section input {
+    width: 100%;
+    background-color: #f9fafb;
+}
+
+/* 7. Lista de Tareas y elementos dinámicos */
+.task-list {
+    list-style: none;
+    margin-top: 20px;
+}
+
+.task-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 12px;
+    transition: all 0.3s ease;
+    flex-wrap: wrap;
+}
+
+/* Estilo aplicado desde JS cuando la tarea está completada */
+.task-item.completada .descripcion-text {
+    text-decoration: line-through;
+    color: #9ca3af;
+}
+
+.task-item .descripcion-text {
+    flex: 1;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Reloj de asincronía */
+.task-item .countdown {
+    display: block;
+    width: 100%;
+    font-size: 0.9rem;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+/* 8. Botones de acción específicos (Verde y Rojo) */
+.acciones {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-estado {
+    background-color: var(--success-color);
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.btn-estado:hover {
+    background-color: var(--success-hover);
+}
+
+.btn-eliminar {
+    background-color: var(--danger-color);
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.btn-eliminar:hover {
+    background-color: var(--danger-hover);
+}
+
+/* 9. Notificación de JS */
+.notificacion {
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+    color: #065f46; 
+    border: 1px solid #a7f3d0;
+}
