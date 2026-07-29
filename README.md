@@ -3,8 +3,9 @@
 **Módulo:** Programación Avanzada en JavaScript  
 **Desarrollador:** Kisi Angélica Toledo Muñoz  
 
-# 0.Enlaces y Referencias
-* [LINK PRUEBA](https://muss3t.github.io/taskflow/)
+## 0.Enlaces y Referencias
+* [LINK PRUEBA-LIVE DEMO](https://muss3t.github.io/taskflow/)
+* [Repositorio del Proyecto en GitHub](https://github.com/tu-usuario/taskflow)
 * [API REST de prueba utilizada: JSONPlaceholder](https://jsonplaceholder.typicode.com/)
 
 ## 1. Resumen Ejecutivo
