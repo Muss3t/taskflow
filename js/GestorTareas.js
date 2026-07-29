@@ -27,4 +27,9 @@ export class GestorTareas {
   obtenerTareas() {
     return this.tareas;
   }
+  // Método para inicializar la lista de tareas (Paso 5)
+  cargarTareas(tareasData) {
+    // Toma los objetos genéricos y los transforma en instancias de la clase Tarea
+    this.tareas = tareasData.map((datos) => new Tarea(datos));
+  }
 }
